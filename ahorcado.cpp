@@ -45,26 +45,36 @@ int main(){
 
 Juego::Juego(int vidas_){
     
-    palabra[0] = 'c';
-    palabra[1] = 'o';
-    palabra[2] = 'l';
-    palabra[3] = 'o';
-    palabra[4] = 'm';
-    palabra[5] = 'b';
-    palabra[6] = 'i';
-    palabra[7] = 'a';
+    FILE *fichero = fopen("fichero.txt", "r");
     
-    avance[0] = '_';
-    avance[1] = '_';
-    avance[2] = '_';
-    avance[3] = '_';
-    avance[4] = '_';
-    avance[5] = '_';
-    avance[6] = '_';
-    avance[7] = '_';
+    srand(time(NULL));
+    int n = rand() % 5 + 1;
+    int j;
+    char caracter;
+    
+    cout << n << endl;
+    
+    for(int i = 1; i < n; i++){
+        
+        j = 0;
+        caracter = fgetc(fichero);
+        
+        while( caracter != '\n' ){
+            
+            palabra[j] = caracter;
+            caracter = fgetc(fichero);
+            avance[j] =  '_';
+            j++;
+            
+        }
+        
+    }
+    
+    fclose(fichero);
+    
     
     vidas = vidas_;
-    longitud = 8;
+    longitud = j;
     descubiertas = 0;
     
 };
